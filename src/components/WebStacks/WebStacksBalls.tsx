@@ -13,7 +13,6 @@ const stacks = [
   { name: "Perplexity", logo: "/logos/perplexity.svg" },
 ];
 
-// Define variants as functions with correct typing
 const ballVariants: Variants = {
   initial: (i: number) => ({
     y: -120,
@@ -40,7 +39,14 @@ const ballVariants: Variants = {
 export default function WebStacksBalls() {
   return (
     <section style={{ margin: "3rem 0" }}>
-      <h2 style={{ textAlign: "center" }}>My Web Stacks</h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, type: "spring" }}
+        style={{ textAlign: "center" }}
+      >
+        My Web Stacks
+      </motion.h2>
       <div
         style={{
           display: "flex",
@@ -85,6 +91,9 @@ export default function WebStacksBalls() {
               src={stack.logo}
               alt={stack.name}
               style={{ width: 38, height: 38, objectFit: "contain" }}
+              onError={e => {
+                (e.target as HTMLImageElement).src = "https://via.placeholder.com/38";
+              }}
             />
           </motion.div>
         ))}
