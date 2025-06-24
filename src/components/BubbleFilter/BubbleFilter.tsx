@@ -14,12 +14,11 @@ const BubbleFilter: React.FC = () => {
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
       bubble.style.left = `${Math.random() * 100}%`;
-      bubble.style.animationDuration = `${8 + Math.random() * 4}s`;
+      bubble.style.animationDuration = `${8 + Math.random() * 6}s`;
       bubble.style.opacity = `${0.2 + Math.random() * 0.5}`;
       bubble.style.width = bubble.style.height = `${20 + Math.random() * 40}px`;
       container.appendChild(bubble);
     }
-
     const handleMouseMove = (e: MouseEvent) => {
       const bubbles = container.querySelectorAll('.bubble');
       bubbles.forEach((bubble) => {

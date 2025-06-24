@@ -1,19 +1,30 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import AnimatedNameBubbles from "./AnimatedNameBubbles";
 
-const HeroSection: React.FC = () => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
-    className="hero-section"
-    style={{ position: 'relative', zIndex: 1, padding: '5rem 2rem', textAlign: 'center' }}
-  >
-    <h1 style={{ fontSize: '3rem', color: '#222' }}>Shloke Binani</h1>
-    <p style={{ fontSize: '1.5rem', color: '#555' }}>
-      Electronics & AI/ML Enthusiast | Designer | Open to Internships
-    </p>
-  </motion.div>
-);
-
-export default HeroSection;
+export default function HeroSection() {
+  return (
+    <section style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: "60vh",
+      background: "linear-gradient(135deg, #A4C8E1 0%, #F5E1A4 100%)"
+    }}>
+      <img
+        src="/your-photo.jpg"
+        alt="Shloke Binani"
+        style={{
+          borderRadius: "50%",
+          width: 180,
+          height: 180,
+          objectFit: "cover",
+          marginRight: "4rem",
+          boxShadow: "0 8px 32px rgba(31,38,135,0.18)"
+        }}
+      />
+      <div>
+        <AnimatedNameBubbles />
+      </div>
+    </section>
+  );
+}

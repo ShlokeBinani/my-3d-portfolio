@@ -1,7 +1,9 @@
 body {
   background: linear-gradient(135deg, #A4C8E1 0%, #F5E1A4 100%);
   min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2, h3 {
@@ -9,7 +11,7 @@ h1, h2, h3 {
 }
 
 section, .glass-section {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.7);
   border-radius: 1.5rem;
   margin: 2rem auto;
   padding: 2rem;
