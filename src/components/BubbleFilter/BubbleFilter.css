@@ -1,25 +1,26 @@
 .bubble-filter-container {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   z-index: 0;
-  pointer-events: none;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
 
 .bubble {
   position: absolute;
-  bottom: -40px;
+  bottom: -60px;
   border-radius: 50%;
   background: rgba(255,255,255,0.25);
   animation: bubbleRise linear infinite;
-  will-change: transform;
+  will-change: transform, background;
   transition: background 0.3s, transform 0.3s;
+  filter: blur(1px);
 }
 
 @keyframes bubbleRise {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-110vh); }
+  0% { transform: translateY(0);}
+  100% { transform: translateY(-110vh);}
 }
