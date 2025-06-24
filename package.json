@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://ShlokeBinani.github.io/my-3d-portfolio",
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@react-spring/web": "^10.0.1",
     "@react-three/drei": "^10.3.0",
     "@react-three/fiber": "^9.1.2",
@@ -21,10 +22,14 @@
     "web-vitals": "^5.0.3"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "gh-pages": "^6.0.0"
+    "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.10"
   },
   "overrides": {
     "react-scripts": {

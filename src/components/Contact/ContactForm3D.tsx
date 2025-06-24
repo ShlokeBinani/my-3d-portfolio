@@ -1,23 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function ContactForm3D() {
-  const [data, setData] = React.useState({ 
-    name: "", 
-    email: "", 
-    message: "" 
+  // Initialize Formspree with your form ID
+  const [state, handleSubmit] = useForm("mnnvgknw");
+
+  // Local form state for controlled inputs
+  const [data, setData] = React.useState({
+    name: "",
+    email: "",
+    message: ""
   });
 
-  // Fix: Properly type the change handler
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  // Update local state on change
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setData({ ...data, [e.target.name]: e.target.value });
-  };
-
-  // Fix: Properly type the submit handler
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted:", data);
-    alert("Message sent!");
   };
 
   return (
@@ -27,8 +27,8 @@ export default function ContactForm3D() {
       exit={{ opacity: 0, y: 60 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
       viewport={{ amount: 0.3 }}
-      style={{ 
-        textAlign: "center", 
+      style={{
+        textAlign: "center",
         padding: "3rem 1rem",
         margin: "4rem auto",
         background: "var(--card-bg)",
@@ -39,24 +39,28 @@ export default function ContactForm3D() {
         zIndex: 2
       }}
     >
-      <h2 style={{ 
-        color: "var(--primary)", 
-        marginBottom: "2rem",
-        fontSize: "2.5rem"
-      }}>
+      <h2
+        style={{
+          color: "var(--primary)",
+          marginBottom: "2rem",
+          fontSize: "2.5rem"
+        }}
+      >
         Get In Touch
       </h2>
-      <form 
-        onSubmit={handleSubmit} 
+
+      {/* Formspree handles submission */}
+      <form
+        onSubmit={handleSubmit}
         style={{
-          display: "flex", 
-          flexDirection: "column", 
-          gap: "1.5rem", 
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
           maxWidth: 500,
-          margin: "0 auto", 
-          padding: "2.5rem", 
+          margin: "0 auto",
+          padding: "2.5rem",
           background: "var(--background)",
-          border: "1.5px solid var(--primary)", 
+          border: "1.5px solid var(--primary)",
           borderRadius: "1.5rem",
           boxShadow: "0 8px 32px 0 rgba(187, 10, 33, 0.15)"
         }}
@@ -79,6 +83,8 @@ export default function ContactForm3D() {
             transition: "border-color 0.3s ease"
           }}
         />
+        <ValidationError prefix="Name" field="name" errors={state.errors} />
+
         <input
           name="email"
           type="email"
@@ -97,6 +103,8 @@ export default function ContactForm3D() {
             transition: "border-color 0.3s ease"
           }}
         />
+        <ValidationError prefix="Email" field="email" errors={state.errors} />
+
         <textarea
           name="message"
           value={data.message}
@@ -117,9 +125,12 @@ export default function ContactForm3D() {
             transition: "border-color 0.3s ease"
           }}
         />
+        <ValidationError prefix="Message" field="message" errors={state.errors} />
+
         <motion.button
           type="submit"
-          whileHover={{ 
+          disabled={state.submitting}
+          whileHover={{
             scale: 1.05,
             background: "var(--accent)",
             boxShadow: "0 8px 25px rgba(255, 26, 75, 0.3)"
@@ -137,7 +148,7 @@ export default function ContactForm3D() {
             transition: "all 0.3s ease"
           }}
         >
-          Send Message
+          {state.submitting ? "Sending..." : "Send Message"}
         </motion.button>
       </form>
     </motion.section>
