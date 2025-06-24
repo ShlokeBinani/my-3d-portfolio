@@ -1,0 +1,58 @@
+import React from "react";
+import { CardStack } from "@/components/ui/CardStack";
+
+const projects = [
+  {
+    id: 1,
+    title: "Distance Detector",
+    desc: "IR-based obstacle detection",
+    tech: ["Arduino", "C++"],
+  },
+  {
+    id: 2,
+    title: "Light Circuit",
+    desc: "Ambient light sensing",
+    tech: ["LDR", "Sensor"],
+  },
+  {
+    id: 3,
+    title: "Code Lock",
+    desc: "4-digit secure access",
+    tech: ["IoT"],
+  },
+  {
+    id: 4,
+    title: "Snake Game",
+    desc: "Classic Python game",
+    tech: ["Python"],
+  }
+];
+
+export default function ProjectsStackSection() {
+  return (
+    <section className="py-12">
+      <h2 className="text-3xl font-bold text-center mb-8 text-red-700 dark:text-red-400">Featured Projects</h2>
+      <CardStack
+        items={projects.map((proj) => ({
+          id: proj.id,
+          content: (
+            <div>
+              <h3 className="text-xl font-bold text-neutral-700 dark:text-white mb-2">{proj.title}</h3>
+              <p className="text-neutral-500 dark:text-neutral-300 mb-4">{proj.desc}</p>
+              <div className="flex gap-2 flex-wrap">
+                {proj.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="bg-black/10 dark:bg-white/10 px-2 py-1 rounded text-xs text-neutral-700 dark:text-neutral-200"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ),
+        }))}
+      />
+    </section>
+  );
+}

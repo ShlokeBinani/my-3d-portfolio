@@ -2,53 +2,144 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export default function ContactForm3D() {
-  const [hovered, setHovered] = React.useState(false);
+  const [data, setData] = React.useState({ 
+    name: "", 
+    email: "", 
+    message: "" 
+  });
+
+  // Fix: Properly type the change handler
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  // Fix: Properly type the submit handler
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submitted:", data);
+    alert("Message sent!");
+  };
 
   return (
-    <motion.form
-      initial={{ opacity: 0, scale: 0.8, y: 80 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.8, type: "spring" }}
-      style={{
-        margin: "2rem auto",
-        padding: "2rem",
-        maxWidth: 400,
+    <motion.section
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 60 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+      viewport={{ amount: 0.3 }}
+      style={{ 
+        textAlign: "center", 
+        padding: "3rem 1rem",
+        margin: "4rem auto",
+        background: "var(--card-bg)",
+        border: "1.5px solid var(--primary)",
         borderRadius: "1.5rem",
-        background: "rgba(255,255,255,0.9)",
-        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.17)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        transform: hovered ? "rotateY(8deg) rotateX(4deg) scale(1.03)" : "none",
-        transition: "transform 0.3s"
+        maxWidth: 1000,
+        position: "relative",
+        zIndex: 2
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
-      <input placeholder="Your Name" style={inputStyle} />
-      <input placeholder="Your Email" style={inputStyle} />
-      <textarea placeholder="Your Message" rows={4} style={inputStyle} />
-      <motion.button
-        whileTap={{ scale: 0.95 }}
+      <h2 style={{ 
+        color: "var(--primary)", 
+        marginBottom: "2rem",
+        fontSize: "2.5rem"
+      }}>
+        Get In Touch
+      </h2>
+      <form 
+        onSubmit={handleSubmit} 
         style={{
-          background: "#4f8cff",
-          color: "#fff",
-          border: "none",
-          borderRadius: "1rem",
-          padding: "0.8rem",
-          fontWeight: "bold",
-          cursor: "pointer"
+          display: "flex", 
+          flexDirection: "column", 
+          gap: "1.5rem", 
+          maxWidth: 500,
+          margin: "0 auto", 
+          padding: "2.5rem", 
+          background: "var(--background)",
+          border: "1.5px solid var(--primary)", 
+          borderRadius: "1.5rem",
+          boxShadow: "0 8px 32px 0 rgba(187, 10, 33, 0.15)"
         }}
-      >Send</motion.button>
-    </motion.form>
+      >
+        <input
+          name="name"
+          type="text"
+          value={data.name}
+          onChange={handleChange}
+          required
+          placeholder="Your Name"
+          style={{
+            padding: "1rem 1.5rem",
+            border: "2px solid var(--primary)",
+            borderRadius: "1rem",
+            background: "var(--card-bg)",
+            color: "var(--text-primary)",
+            fontSize: "1rem",
+            outline: "none",
+            transition: "border-color 0.3s ease"
+          }}
+        />
+        <input
+          name="email"
+          type="email"
+          value={data.email}
+          onChange={handleChange}
+          required
+          placeholder="Your Email"
+          style={{
+            padding: "1rem 1.5rem",
+            border: "2px solid var(--primary)",
+            borderRadius: "1rem",
+            background: "var(--card-bg)",
+            color: "var(--text-primary)",
+            fontSize: "1rem",
+            outline: "none",
+            transition: "border-color 0.3s ease"
+          }}
+        />
+        <textarea
+          name="message"
+          value={data.message}
+          onChange={handleChange}
+          required
+          rows={5}
+          placeholder="Your Message"
+          style={{
+            padding: "1rem 1.5rem",
+            border: "2px solid var(--primary)",
+            borderRadius: "1rem",
+            background: "var(--card-bg)",
+            color: "var(--text-primary)",
+            fontSize: "1rem",
+            outline: "none",
+            resize: "vertical",
+            minHeight: "120px",
+            transition: "border-color 0.3s ease"
+          }}
+        />
+        <motion.button
+          type="submit"
+          whileHover={{ 
+            scale: 1.05,
+            background: "var(--accent)",
+            boxShadow: "0 8px 25px rgba(255, 26, 75, 0.3)"
+          }}
+          whileTap={{ scale: 0.95 }}
+          style={{
+            padding: "1rem 2rem",
+            background: "var(--primary)",
+            border: "none",
+            borderRadius: "1rem",
+            color: "#fff",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            cursor: "pointer",
+            transition: "all 0.3s ease"
+          }}
+        >
+          Send Message
+        </motion.button>
+      </form>
+    </motion.section>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  padding: "0.8rem",
-  borderRadius: "1rem",
-  border: "1px solid #A4C8E1",
-  fontSize: "1rem",
-  background: "#F5E1A4",
-  color: "#1A3742"
-};

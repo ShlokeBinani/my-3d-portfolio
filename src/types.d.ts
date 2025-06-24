@@ -1,4 +1,5 @@
-// src/types.d.ts or src/react-three-fiber.d.ts
+declare module 'animejs';
+
 import { ThreeElements } from '@react-three/fiber';
 
 declare global {
@@ -8,3 +9,5 @@ declare global {
     }
   }
 }
+
+export {};

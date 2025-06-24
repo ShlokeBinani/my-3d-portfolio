@@ -1,20 +1,21 @@
-body {
-  background: linear-gradient(135deg, #A4C8E1 0%, #F5E1A4 100%);
-  min-height: 100vh;
-  font-family: 'Poppins', Arial, sans-serif;
+:root {
+  --background: #101014;         /* Royal Black main background */
+  --primary: #bb0a21;            /* Royal blood red accent */
+  --accent: #ff1a4b;             /* Bright red accent */
+  --text-primary: #fafafa;       /* White text */
+  --card-bg: #18181c;            /* Dark card background */
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  transition: color 0.3s, background-color 0.3s;    /* Smooth theme transitions */
 }
 
-h1, h2, h3 {
-  color: #1A3742;
-}
-
-section, .glass-section {
-  background: rgba(255,255,255,0.7);
-  border-radius: 1.5rem;
-  margin: 2rem auto;
-  padding: 2rem;
-  max-width: 900px;
-  box-shadow: 0 4px 32px 0 rgba(31, 38, 135, 0.07);
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }

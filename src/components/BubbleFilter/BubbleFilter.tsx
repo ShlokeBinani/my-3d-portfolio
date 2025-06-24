@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import './BubbleFilter.css';
 
-const NUM_BUBBLES = 30;
+const NUM_BUBBLES = 25;
 
 const BubbleFilter: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,16 +9,19 @@ const BubbleFilter: React.FC = () => {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    
     container.innerHTML = '';
+    
     for (let i = 0; i < NUM_BUBBLES; i++) {
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
       bubble.style.left = `${Math.random() * 100}%`;
       bubble.style.animationDuration = `${8 + Math.random() * 6}s`;
-      bubble.style.opacity = `${0.2 + Math.random() * 0.5}`;
-      bubble.style.width = bubble.style.height = `${20 + Math.random() * 40}px`;
+      bubble.style.opacity = `${0.1 + Math.random() * 0.3}`;
+      bubble.style.width = bubble.style.height = `${15 + Math.random() * 35}px`;
       container.appendChild(bubble);
     }
+    
     const handleMouseMove = (e: MouseEvent) => {
       const bubbles = container.querySelectorAll('.bubble');
       bubbles.forEach((bubble) => {
@@ -26,15 +29,17 @@ const BubbleFilter: React.FC = () => {
         const dx = e.clientX - (rect.left + rect.width / 2);
         const dy = e.clientY - (rect.top + rect.height / 2);
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 60) {
-          (bubble as HTMLElement).style.transform = 'scale(1.5)';
-          (bubble as HTMLElement).style.background = 'rgba(164, 200, 225, 0.6)';
+        
+        if (dist < 80) {
+          (bubble as HTMLElement).style.transform = 'scale(1.8)';
+          (bubble as HTMLElement).style.background = 'rgba(255, 26, 75, 0.4)';
         } else {
           (bubble as HTMLElement).style.transform = 'scale(1)';
-          (bubble as HTMLElement).style.background = 'rgba(255,255,255,0.25)';
+          (bubble as HTMLElement).style.background = 'rgba(187, 10, 33, 0.18)';
         }
       });
     };
+    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
